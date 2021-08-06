@@ -12,10 +12,16 @@ export default class Controller {
     }
 
     subscribeViewEvents() {
-        this.searchFormView.on('@submit', (e) => this.search(e.detail.value));
+        this.searchFormView
+            .on('@submit', (e) => this.search(e.detail.value))
+            .on('@reset', () => this.reset());
     }
 
     search(keyword) {
         console.log(keyword);
+    }
+
+    reset() {
+        console.log('reset');
     }
 }
