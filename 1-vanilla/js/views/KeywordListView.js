@@ -15,7 +15,7 @@ export default class KeywordListView extends View {
 
     handleClick(e) {
         const value = e.target.dataset.keyword;
-        this.emit('@click', { value: e.target.dataset.keyword })
+        this.emit('@click', { value: value })
     }
 
     show(data = []) {
