@@ -12,7 +12,7 @@ export default class Store {
 
         this.searchKeyword = '';
         this.searchResult = [];
-        this.seletedTab = TabType.KEYWORD;
+        this.selectedTab = TabType.KEYWORD;
     }
 
     search(keyword) {
