@@ -22,7 +22,9 @@ export default class Controller {
             .on('@submit', (e) => this.search(e.detail.value))
             .on('@reset', () => this.reset())
         
-        this.tabView.on('@change', e => this.changeTab(e.detail.value));
+        this.tabView.on('@change', (e) => this.changeTab(e.detail.value));
+
+        this.keywordListView.on('@click', (e) => this.search(e.detail.value))
     }
 
     search(keyword) {
