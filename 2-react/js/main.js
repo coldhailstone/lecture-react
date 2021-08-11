@@ -16,6 +16,11 @@ class App extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(this.state.searchKeyword);
+  }
+
   render() {
     // let resetButton = null;
     // if (this.state.searchKeyword) {
@@ -28,7 +33,7 @@ class App extends React.Component {
           <h2 className="container">검색</h2>
         </header>
         <div className="container">
-          <form id="search-form-view">
+          <form onSubmit={this.handleSubmit.bind(this)}>
             <input type="text" placeholder="검색어를 입력하세요" autoFocus value={this.state.searchKeyword} onChange={this.handleChangeInput.bind(this)} />
             {this.state.searchKeyword && (<button type="reset" className="btn-reset"></button>)}
           </form>
