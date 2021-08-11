@@ -48,7 +48,7 @@ class App extends React.Component {
                autoFocus
                 value={this.state.searchKeyword} 
                 onChange={this.handleChangeInput.bind(this)} 
-              />
+            />
             {this.state.searchKeyword && (<button type="reset" className="btn-reset"></button>)}
           </form>
           <div className="content">
