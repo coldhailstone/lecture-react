@@ -3,7 +3,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      searchKeyword: ''
+      searchKeyword: '',
+      searchResult: []
     };
   }
 
@@ -13,7 +14,9 @@ class App extends React.Component {
   }
 
   handleReset() {
-    this.setState({ searchKeyword: '' }, () => {
+    this.setState(() => {
+      return { searchKeyword: '' }
+    }, () => {
       console.log(this.state.searchKeyword);
     });
   }
@@ -29,21 +32,32 @@ class App extends React.Component {
   }
 
   render() {
-    // let resetButton = null;
-    // if (this.state.searchKeyword) {
-    //   resetButton = <button type="reset" className="btn-reset"></button>
-    // }
-
     return (
       <>
         <header>
           <h2 className="container">검색</h2>
         </header>
         <div className="container">
-          <form onSubmit={this.handleSubmit.bind(this)} onReset={this.handleReset.bind(this)}>
-            <input type="text" placeholder="검색어를 입력하세요" autoFocus value={this.state.searchKeyword} onChange={this.handleChangeInput.bind(this)} />
+          <form 
+            onSubmit={this.handleSubmit.bind(this)} 
+            onReset={this.handleReset.bind(this)}
+          >
+            <input 
+              type="text" 
+              placeholder="검색어를 입력하세요"
+               autoFocus
+                value={this.state.searchKeyword} 
+                onChange={this.handleChangeInput.bind(this)} 
+              />
             {this.state.searchKeyword && (<button type="reset" className="btn-reset"></button>)}
           </form>
+          <div className="content">
+            {this.state.searchResult.length > 0 ? (
+              <div>TODO: 검색 결과 목록 표시하기</div>
+            ) : (
+              <div className="empty-box">검색 결과가 없습니다</div>
+            )}
+          </div>
         </div>
       </>
     );
