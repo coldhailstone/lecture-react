@@ -1,4 +1,12 @@
 class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      searchKeyword: ''
+    };
+  }
+
   render() {
     return (
       <>
@@ -7,7 +15,7 @@ class App extends React.Component {
         </header>
         <div className="container">
           <form id="search-form-view">
-            <input type="text" placeholder="검색어를 입력하세요" autoFocus />
+            <input type="text" placeholder="검색어를 입력하세요" autoFocus value={this.state.searchKeyword} />
             <button type="reset" className="btn-reset"></button>
           </form>
         </div>
