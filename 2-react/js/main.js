@@ -7,6 +7,15 @@ class App extends React.Component {
     };
   }
 
+  handleChangeInput(e) {
+    // this.state.searchKeyword = e.target.value;
+    // this.forceUpdate();
+
+    this.setState({
+      searchKeyword: e.target.value
+    });
+  }
+
   render() {
     return (
       <>
@@ -15,7 +24,7 @@ class App extends React.Component {
         </header>
         <div className="container">
           <form id="search-form-view">
-            <input type="text" placeholder="검색어를 입력하세요" autoFocus value={this.state.searchKeyword} />
+            <input type="text" placeholder="검색어를 입력하세요" autoFocus value={this.state.searchKeyword} onChange={this.handleChangeInput.bind(this)} />
             <button type="reset" className="btn-reset"></button>
           </form>
         </div>
