@@ -6,7 +6,8 @@ class App extends React.Component {
 
     this.state = {
       searchKeyword: '',
-      searchResult: []
+      searchResult: [],
+      submitted: false
     };
   }
 
@@ -17,7 +18,10 @@ class App extends React.Component {
 
   search(searchKeyword) {
     const searchResult = store.search(searchKeyword);
-    this.setState({ searchResult });
+    this.setState({ 
+      searchResult,
+      submitted: true
+    });
   }
 
   handleReset() {
@@ -39,40 +43,46 @@ class App extends React.Component {
   }
 
   render() {
+    const searchForm = (
+      <form 
+        onSubmit={this.handleSubmit.bind(this)} 
+        onReset={this.handleReset.bind(this)}
+      >
+        <input 
+          type="text" 
+          placeholder="검색어를 입력하세요"
+            autoFocus
+            value={this.state.searchKeyword} 
+            onChange={this.handleChangeInput.bind(this)} 
+        />
+        {this.state.searchKeyword && (<button type="reset" className="btn-reset"></button>)}
+      </form>
+    );
+    
+    const searchResult = this.state.searchResult.length > 0 ? (
+      <ul className="result">
+        {this.state.searchResult.map((item) => {
+          return (
+            <li key={item.id}>
+              <img src={item.imageUrl} alt={item.name} />
+              <p>{item.name}</p>
+            </li>
+          )
+        })}
+      </ul>
+    ) : (
+      <div className="empty-box">검색 결과가 없습니다</div>
+    );
+
     return (
       <>
         <header>
           <h2 className="container">검색</h2>
         </header>
         <div className="container">
-          <form 
-            onSubmit={this.handleSubmit.bind(this)} 
-            onReset={this.handleReset.bind(this)}
-          >
-            <input 
-              type="text" 
-              placeholder="검색어를 입력하세요"
-               autoFocus
-                value={this.state.searchKeyword} 
-                onChange={this.handleChangeInput.bind(this)} 
-            />
-            {this.state.searchKeyword && (<button type="reset" className="btn-reset"></button>)}
-          </form>
+          {searchForm}
           <div className="content">
-            {this.state.searchResult.length > 0 ? (
-              <ul className="result">
-                {this.state.searchResult.map((item) => {
-                  return (
-                    <li>
-                      <img src={item.imageUrl} alt={item.name} />
-                      <p>{item.name}</p>
-                    </li>
-                  )
-                })}
-              </ul>
-            ) : (
-              <div className="empty-box">검색 결과가 없습니다</div>
-            )}
+            {this.state.submitted && searchResult}
           </div>
         </div>
       </>
