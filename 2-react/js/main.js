@@ -25,8 +25,9 @@ class App extends React.Component {
   }
 
   handleReset() {
-    this.setState(() => {
-      return { searchKeyword: '' }
+    this.setState({
+      searchKeyword: '',
+      submitted: false
     }, () => {
       console.log(this.state.searchKeyword);
     });
@@ -39,7 +40,7 @@ class App extends React.Component {
       return this.handleReset();
     }
 
-    this.setState({ searchKeyword: searchKeyword });
+    this.setState({ searchKeyword });
   }
 
   render() {
