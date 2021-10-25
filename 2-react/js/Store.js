@@ -1,3 +1,4 @@
+import { createNextId } from './helpers.js';
 import storage from './storage.js';
 
 const tag = "[store]";
@@ -12,7 +13,26 @@ class Store {
     }
 
     search(keyword) {
+        this.addHistory(keyword);
+
         return this.storage.productData.filter((product) => product.name.includes(keyword));
+    }
+
+    addHistory(keyword = "") {
+        keyword = keyword.trim();
+        if (!keyword) {
+            return;
+        }
+
+        const hasHistory = this.storage.historyData.some((history) => history.keyword === keyword);
+        if (hasHistory) {
+            this.removeHistory(keyword);
+        }
+
+        const id = createNextId(this.storage.historyData);
+        const date = new Date();
+        this.storage.historyData.push({ id, keyword, date });
+        this.storage.historyData = this.storage.historyData.sort(this._sortHistory);
     }
 
     getKeywordList() {

@@ -42,9 +42,12 @@ class App extends React.Component {
 
   search(searchKeyword) {
     const searchResult = store.search(searchKeyword);
+    const historyList = store.getHistoryList();
+
     this.setState({
       searchKeyword,
       searchResult,
+      historyList,
       submitted: true
     });
   }
