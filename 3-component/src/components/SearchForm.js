@@ -26,7 +26,7 @@ const SearchForm = ({ value, onChange, onSubmit, onReset }) => {
                 value={value} 
                 onChange={handleChangeInput} 
             />
-            {value.length > 0 && <button type="reset" className="btn-reset"></button>}
+            {value.length > 0 && <button type="reset" className="btn-reset" />}
         </form>
     )
 }
