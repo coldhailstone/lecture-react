@@ -1,50 +1,34 @@
 import React from 'react';
 
-export default class SearchForm extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            searchKeyword: ""
-        };
-    }
-
-    handleSubmit(e) {
+const SearchForm = ({ value, onChange, onSubmit, onReset }) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.state.searchKeyword);
+        onSubmit();
     }
 
-    handleReset() {
-        this.props.onReset();
+    const handleReset = () => {
+        onReset();
     }
 
-    handleChangeInput(e) {
-        const searchKeyword = e.target.value;
-
-        if (searchKeyword.length <= 0) {
-            this.handleReset();
-        }
-
-        this.setState({ searchKeyword });
+    const handleChangeInput = (e) => {
+        onChange(e.target.value);
     }
 
-    render() {
-        return (
-            <form 
-                onSubmit={this.handleSubmit.bind(this)} 
-                onReset={this.handleReset.bind(this)}
-            >
-                <input 
-                    type="text" 
-                    placeholder="검색어를 입력하세요"
-                    autoFocus
-                    value={this.state.searchKeyword} 
-                    onChange={this.handleChangeInput.bind(this)} 
-                />
-                {this.state.searchKeyword && (
-                    <button type="reset" className="btn-reset"></button>
-                )}
-            </form>
-        )
-    }
+    return (
+        <form 
+            onSubmit={handleSubmit} 
+            onReset={handleReset}
+        >
+            <input 
+                type="text" 
+                placeholder="검색어를 입력하세요"
+                autoFocus
+                value={value} 
+                onChange={handleChangeInput} 
+            />
+            {value.length > 0 && <button type="reset" className="btn-reset"></button>}
+        </form>
+    )
 }
+
+export default SearchForm;
