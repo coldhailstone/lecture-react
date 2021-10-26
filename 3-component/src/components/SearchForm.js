@@ -9,14 +9,31 @@ export default class SearchForm extends React.Component {
         };
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onSubmit(this.state.searchKeyword);
+    }
+
+    handleReset() {
+        this.props.onReset();
+    }
+
     handleChangeInput(e) {
         const searchKeyword = e.target.value;
+
+        if (searchKeyword.length <= 0) {
+            this.handleReset();
+        }
+
         this.setState({ searchKeyword });
     }
 
     render() {
         return (
-            <form>
+            <form 
+                onSubmit={this.handleSubmit.bind(this)} 
+                onReset={this.handleReset.bind(this)}
+            >
                 <input 
                     type="text" 
                     placeholder="검색어를 입력하세요"
